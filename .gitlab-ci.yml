@@ -1,0 +1,28 @@
+default:
+  image: openjdk:8-jdk
+
+stages:
+  - build
+  - test
+
+build project:
+  stage: build
+  script:
+    - ./gradlew assemble
+  artifacts:
+    name: build-artifacts
+    expire_in: 1d
+    paths:
+      - build
+
+test project:
+  stage: test
+  script:
+    - ./gradlew check
+  artifacts:
+    name: test-artifacts
+    expire_in: 1d
+    reports:
+      junit:
+        - build/test-results/test/TEST-*.xml
+
