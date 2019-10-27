@@ -1,0 +1,41 @@
+!.gitignore
+
+# eclipse
+.project
+.classpath
+.eclipse-pmd
+**/.settings/
+**/.metadata/
+
+## intellij
+# User-specific stuff
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/misc.xml
+.idea/**/dictionaries
+.idea/checkstyle-idea\.xml
+.idea/modules\.xml
+.idea/eclipseCodeFormatter\.xml
+.idea/**/shelf
+# Sensitive or high-churn files
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+.idea/**/dbnavigator.xml
+# Gradle
+.idea/**/gradle.xml
+.idea/**/libraries
+# File-based project format
+*.iws
+# IntelliJ
+out/
+*.iml
+# Editor-based Rest Client
+.idea/httpRequests
+
+# gradle
+**/build/
+.gradle
