@@ -1,0 +1,28 @@
+version: '3'
+
+services: 
+  confluence1:
+    image: atlassian/confluence-server:7
+    ports:
+      - "8090:8090"
+      - "8091:8091"
+    volumes: 
+      - confluence1:/var/atlassian/application-data/confluence
+  confluence2:
+    image: atlassian/confluence-server:7
+    ports:
+      - "8098:8090"
+      - "8099:8091"
+    volumes: 
+      - confluence2:/var/atlassian/application-data/confluence
+  rest-repository:
+    image: python:3
+    ports:
+      - "8080:80"
+    command: python3 -m http.server 80 --bind 0.0.0.0 --directory /docs
+    volumes:
+      - "./src/test/docs:/docs"
+
+volumes:
+ confluence1:
+ confluence2:
