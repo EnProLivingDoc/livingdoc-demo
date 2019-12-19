@@ -43,20 +43,10 @@ public class ApplePieJavaDocumentMd {
             assertEquals(ap.getApples(), a);
         }
 
-        @Step("For an apple pie he needs at least {a} apples. Peter is {b} able to make an apple pie")
-        void endResult(@Binding("a") Float a, @Binding("b") String b) {
-            boolean enoughApples = (ap.getApples() - a) >= 0;
-            boolean isAble;
-
-            if(b.equals("not")){
-                isAble = false;
-            } else if(b.isEmpty()){
-                isAble = true;
-            } else {
-                throw new IllegalArgumentException("Unable to determine value for b.");
-            }
-
-            assertThat(enoughApples).isEqualTo(isAble);
+        @Step("For an apple pie he needs at least {a} apples. Peter is able to make an apple pie")
+        void endResult(@Binding("a") Float a) {
+            float apples = ap.getApples() - a;
+            assertThat(apples).isGreaterThanOrEqualTo(0);
         }
 
         @After

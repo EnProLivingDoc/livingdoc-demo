@@ -42,17 +42,10 @@ class ApplePieDocumentConfluenceOne {
             assertThat(ap.apples).isEqualTo(a)
         }
 
-        @Step("For an apple pie he needs at least {a} apples. Peter is {b} able to make an apple pie")
-        fun endResult(@Binding("a") a: Float, @Binding("b") b: String) {
-            val enoughApples = (ap.apples - a) >= 0
-
-            val isAble: Boolean = when (b) {
-                "" -> true
-                "not" -> false
-                else -> throw IllegalArgumentException("Unable to determine value for b.")
-            }
-
-            assertThat(enoughApples).isEqualTo(isAble)
+        @Step("For an apple pie he needs at least {a} apples. Peter is able to make an apple pie")
+        fun endResult(@Binding("a") a: Float) {
+            val apples = ap.apples - a
+            assertThat(apples).isGreaterThanOrEqualTo(0.0f)
         }
 
         @After
