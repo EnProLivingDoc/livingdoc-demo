@@ -99,6 +99,43 @@ class GroupedDocuments {
 
     @ExecutableDocument("local://Calculator.md")
     class GroupedDocument2 {
+        @DecisionTableFixture
+        class CalculatorDecisionTableFixture {
+
+            @Input("a")
+            private var valueA: Float = 0f
+            private var valueB: Float = 0f
+
+            @Input("b")
+            fun setValueB(valueB: Float) {
+                this.valueB = valueB
+            }
+
+            @Check("a + b = ?")
+            fun checkSum(expectedValue: Float) {
+                val result = sut.sum(valueA, valueB)
+                Assertions.assertThat(result).isEqualTo(expectedValue)
+            }
+
+            @Check("a - b = ?")
+            fun checkDiff(expectedValue: Float) {
+                val result = sut.diff(valueA, valueB)
+                Assertions.assertThat(result).isEqualTo(expectedValue)
+            }
+
+            @Check("a * b = ?")
+            fun checkMultiply(expectedValue: Float) {
+                val result = sut.multiply(valueA, valueB)
+                Assertions.assertThat(result).isEqualTo(expectedValue)
+            }
+
+            @Check("a / b = ?")
+            fun checkDivide(expectedValue: Float) {
+                val result = sut.divide(valueA, valueB)
+                Assertions.assertThat(result).isEqualTo(expectedValue)
+            }
+        }
+
         @ScenarioFixture
         class CalculatorScenarioFixture {
 
@@ -112,13 +149,13 @@ class GroupedDocuments {
                 Assertions.assertThat(result).isEqualTo(c)
             }
 
-            @Step("subtraction {b} form {a} equals {c}")
-            fun subtract(
+            @Step("multiplying {a} and {b} equals {c}")
+            fun multiply(
                     @Binding("a") a: Float,
                     @Binding("b") b: Float,
                     @Binding("c") c: Float
             ) {
-                val result = sut.diff(a, b)
+                val result = sut.multiply(a, b)
                 Assertions.assertThat(result).isEqualTo(c)
             }
         }
@@ -127,9 +164,55 @@ class GroupedDocuments {
 
 @ExecutableDocument("local://Calculator.md", group = GroupedDocuments::class)
 class GroupedDocument3 {
+    @DecisionTableFixture
+    class CalculatorDecisionTableFixture {
+
+        @Input("a")
+        private var valueA: Float = 0f
+        private var valueB: Float = 0f
+
+        @Input("b")
+        fun setValueB(valueB: Float) {
+            this.valueB = valueB
+        }
+
+        @Check("a + b = ?")
+        fun checkSum(expectedValue: Float) {
+            val result = sut.sum(valueA, valueB)
+            Assertions.assertThat(result).isEqualTo(expectedValue)
+        }
+
+        @Check("a - b = ?")
+        fun checkDiff(expectedValue: Float) {
+            val result = sut.diff(valueA, valueB)
+            Assertions.assertThat(result).isEqualTo(expectedValue)
+        }
+
+        @Check("a * b = ?")
+        fun checkMultiply(expectedValue: Float) {
+            val result = sut.multiply(valueA, valueB)
+            Assertions.assertThat(result).isEqualTo(expectedValue)
+        }
+
+        @Check("a / b = ?")
+        fun checkDivide(expectedValue: Float) {
+            val result = sut.divide(valueA, valueB)
+            Assertions.assertThat(result).isEqualTo(expectedValue)
+        }
+    }
 
     @ScenarioFixture
-    class ScenarioTests {
+    class CalculatorScenarioFixture {
+
+        @Step("adding {a} and {b} equals {c}")
+        fun add(
+                @Binding("a") a: Float,
+                @Binding("b") b: Float,
+                @Binding("c") c: Float
+        ) {
+            val result = sut.sum(a, b)
+            Assertions.assertThat(result).isEqualTo(c)
+        }
 
         @Step("multiplying {a} and {b} equals {c}")
         fun multiply(
@@ -138,16 +221,6 @@ class GroupedDocument3 {
                 @Binding("c") c: Float
         ) {
             val result = sut.multiply(a, b)
-            Assertions.assertThat(result).isEqualTo(c)
-        }
-
-        @Step("dividing {a} by {b} equals {c}")
-        fun divide(
-                @Binding("a") a: Float,
-                @Binding("b") b: Float,
-                @Binding("c") c: Float
-        ) {
-            val result = sut.divide(a, b)
             Assertions.assertThat(result).isEqualTo(c)
         }
     }
