@@ -16,6 +16,23 @@ import org.livingdoc.example.GroupedDocuments.Companion.sut
 @Group
 class GroupedDocuments {
 
+    companion object {
+        lateinit var sut: Calculator
+
+        @JvmStatic
+        @Before
+        fun setUp() {
+            sut = Calculator()
+            println("Before group of documents")
+        }
+
+        @JvmStatic
+        @After
+        fun cleanUp() {
+            println("After group of documents")
+        }
+    }
+
     @ExecutableDocument("local://Calculator.md")
     class GroupedDocument1 {
         @DecisionTableFixture
@@ -54,6 +71,30 @@ class GroupedDocuments {
                 Assertions.assertThat(result).isEqualTo(expectedValue)
             }
         }
+
+        @ScenarioFixture
+        class CalculatorScenarioFixture {
+
+            @Step("adding {a} and {b} equals {c}")
+            fun add(
+                    @Binding("a") a: Float,
+                    @Binding("b") b: Float,
+                    @Binding("c") c: Float
+            ) {
+                val result = sut.sum(a, b)
+                Assertions.assertThat(result).isEqualTo(c)
+            }
+
+            @Step("multiplying {a} and {b} equals {c}")
+            fun multiply(
+                    @Binding("a") a: Float,
+                    @Binding("b") b: Float,
+                    @Binding("c") c: Float
+            ) {
+                val result = sut.multiply(a, b)
+                Assertions.assertThat(result).isEqualTo(c)
+            }
+        }
     }
 
     @ExecutableDocument("local://Calculator.md")
@@ -80,23 +121,6 @@ class GroupedDocuments {
                 val result = sut.diff(a, b)
                 Assertions.assertThat(result).isEqualTo(c)
             }
-        }
-    }
-
-    companion object {
-        lateinit var sut: Calculator
-
-        @JvmStatic
-        @Before
-        fun setUp() {
-            sut = Calculator()
-            println("Before group of documents")
-        }
-
-        @JvmStatic
-        @After
-        fun cleanUp() {
-            println("After group of documents")
         }
     }
 }
