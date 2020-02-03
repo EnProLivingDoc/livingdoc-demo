@@ -11,7 +11,7 @@ import org.livingdoc.api.fixtures.scenarios.Binding
 import org.livingdoc.api.fixtures.scenarios.ScenarioFixture
 import org.livingdoc.api.fixtures.scenarios.Step
 
-@ExecutableDocument("confluence-2://327693")
+@ExecutableDocument("confluence-2://327693@1")
 class CalculatorDocumentConfluenceTwo {
 
     @DecisionTableFixture
