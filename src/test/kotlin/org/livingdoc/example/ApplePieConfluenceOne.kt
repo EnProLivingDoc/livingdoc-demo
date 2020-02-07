@@ -46,10 +46,19 @@ class ApplePieConfluenceOne {
             assertThat(ap.apples).isEqualTo(a)
         }
 
-        @Step("For an apple pie he needs at least {a} apples. Peter is able to make an apple pie")
-        fun endResult(@Binding("a") a: Float) {
+        @Step("For an apple pie he needs at least {a} apples. Peter is {b} able to make an apple pie")
+        fun endResult(@Binding("a") a: Float,
+                      @Binding("b") b: String?
+        ) {
             val apples = ap.apples - a
-            assertThat(apples).isGreaterThanOrEqualTo(0.0f)
+            var abletobake = true
+            if (b.isNullOrBlank())
+                abletobake = false
+
+            if (abletobake)
+                assertThat(apples).isGreaterThanOrEqualTo(-3.0f)
+            else
+                assertThat(apples).isGreaterThanOrEqualTo(0.0f)
         }
 
         @After

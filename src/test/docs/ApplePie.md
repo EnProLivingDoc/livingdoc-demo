@@ -1,4 +1,4 @@
-# How not to make an apple pie MANUAL
+# How not to make an apple pie
 
 * Peter has 3 apples
 * At the local market he buys 7 more
