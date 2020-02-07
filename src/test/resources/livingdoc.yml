@@ -24,3 +24,13 @@ repositories:
       path: ""
       username: "admin"
       password: "admin"
+reports:
+  - name: "confluence-report"
+    format: "confluence"
+    config:
+      filename: "confluence-report.html"
+      baseURL: "http://localhost:8090"
+      path: ""
+      username: "admin"
+      password: "admin"
+      comment: "My report"
