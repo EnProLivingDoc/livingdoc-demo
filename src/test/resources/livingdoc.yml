@@ -28,6 +28,7 @@ reports:
   - name: "confluence-report"
     format: "confluence"
     config:
+      repositoryName: "confluence-1"
       filename: "confluence-report.html"
       baseURL: "http://localhost:8090"
       path: ""
