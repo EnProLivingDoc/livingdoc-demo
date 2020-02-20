@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<pre>
+    <gherkin>
+        Feature: Online Searching
+            As a web surfer, I want to search online, so that I can learn new things.
+
+        Scenario: Simple Online search
+                Given firefox web browser is on the Google page
+                When the search phrase &quot;panda&quot; is entered
+                Then results for &quot;panda&quot; are shown
+    </gherkin>
+
+    <gherkin>
+        Feature: Online Searching
+            As a web surfer, I want to search online, so that I can learn new things.
+
+        Scenario: Simple Online search
+                Given google chrome browser is on the Bing page
+                When the search phrase &quot;panda&quot; is entered
+                Then results for &quot;bear&quot; are not shown
+    </gherkin>
+
+    <gherkin>
+        Feature: Online Searching
+            As a web surfer, I want to search Google, so that I can learn new things.
+
+        Scenario Outline: Simple Online searches
+            Given firefox browser is on the Google page
+            When the search phrase &quot;&lt;phrase&gt;&quot; is entered
+            Then results for &quot;&lt;phrase&gt;&quot; are shown
+            And the related results include &quot;&lt;related&gt;&quot;
+
+        Examples: Animals
+            | phrase   | related       |
+            | panda    | Panda Express |
+            | elephant | Elephant Man  |
+    </gherkin>
+</pre>
+</body>
+</html>
